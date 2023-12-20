@@ -1,4 +1,8 @@
-<div class="page">
+<script>
+    export let page = "";
+</script>
+
+<div class="page" bind:this={page}>
     <div class="page-header">
         <slot name="page-header"></slot>
 
@@ -17,7 +21,8 @@
         min-height: 29.7cm;
         padding: 1.5cm 1.0cm 1.0cm 1.0cm;
         margin-top: 5%;
-        margin-left: 5%;
+        margin-left: auto;
+        margin-right: auto;
         border: 1px #D3D3D3 solid;
         background-color: white;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
