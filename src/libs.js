@@ -1,3 +1,5 @@
+import { debug } from "svelte/internal";
+
 export class ElementUtils {
     static hasOverflow(element) {
       if (!element) {
@@ -50,27 +52,28 @@ export class Paginator {
       return page.querySelector('.page-body');
     }
   
-    paginateText(node, container) {
+    paginateText(wordArray, node) {
 
-      const currentPbody = this.currentPbody || this.getPageBody(this.currentPage);
-      const textContainer = node.cloneNode(false);
+      this.currentPbody.appendChild(node);
+
+      let newNode,
+          word,
+          oldText;
   
-      container.appendChild(textContainer);
+      while (wordArray.length) {
+        oldText = node.textContent;
+        word = wordArray.shift();
+        node.textContent += `${word} `;
   
-      const wordArray = node.textContent.split(' ');
-      let currentText = '';
-  
-      wordArray.forEach((word, i) => {
-        const oldText = currentText;
-        currentText += `${word} `;
-        textContainer.textContent = currentText;
-  
-        if (ElementUtils.hasOverflow(currentPbody)) {
-          textContainer.textContent = oldText;
+        if (ElementUtils.hasOverflow(this.currentPbody)) {
+          node.textContent = oldText;
+          newNode = node.cloneNode(true);
+          newNode.textContent = '';
           this.makePage();
-          this.paginateText(node.cloneNode(false).textContent = wordArray.slice(i).join(' '), container);
+          this.paginateText([word, ...wordArray], newNode);
+          break;
         }
-      });
+      }
     }
   
     paginateElement(element, container) {
@@ -81,7 +84,9 @@ export class Paginator {
           this.paginateElement(child, container);
         });
       } else {
-        this.paginateText(element, container);
+        let newNode = element.cloneNode();
+        newNode.textContent = '';
+        this.paginateText(element.textContent.split(' '), newNode);
       }
     }
   

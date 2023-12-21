@@ -1,5 +1,7 @@
 <script>
 	export let page
+    export let size
+    export let orientation
 </script>
 
 <div class="page" bind:this={page}>
