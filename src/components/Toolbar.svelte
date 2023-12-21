@@ -13,6 +13,24 @@
 </div>
 
 <style>
+    #print {
+        background-color: #216778;
+        border: none;
+        text-transform: uppercase;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 12px 16px;
+        font-family: Helvetica, Arial, sans-serif;
+        border-radius: .5rem;
+        margin: 5px;
+        transition: all .2s ease-in-out;
+    }
+    #print:hover {
+        background-color: #1d5361;
+        color: #b8b8b8;
+        transform: translateY(-3px);
+    }
     .toolbar {
         background: none repeat scroll 0% 0% rgba(0, 0, 255, 0.3);
         background-color: rgb(71, 71, 71);

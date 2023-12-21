@@ -1,22 +1,21 @@
 <script>
-    export let page = "";
+	export let page
 </script>
 
 <div class="page" bind:this={page}>
     <div class="page-header">
-        <slot name="page-header"></slot>
-
+        <h1>Header da página</h1>
     </div>
-    <div class="page-body">
-        <slot name="page-body"></slot>
-    </div>
-    <div class="page-footer">
-        <slot name="page-footer"></slot>
+	<div class="page-body"></div>
+	<div class="page-footer">
+        <footer>
+            &copy; TMX | 2023 
+        </footer>
     </div>
 </div>
 
 <style>
-    .page {
+  	.page {
         width: 21cm;
         min-height: 29.7cm;
         padding: 1.5cm 1.0cm 1.0cm 1.0cm;
