@@ -20,7 +20,7 @@
 	</Paginator>
 	
 	
-	<Page orientation="portrait" bind:page/>
+	<Page bgImage="/img/logo.jpg" orientation="portrait" bind:page/>
 </div>
 
 <PageContent bind:content />

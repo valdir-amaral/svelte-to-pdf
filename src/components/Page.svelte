@@ -2,13 +2,15 @@
 	export let page
     export let width = 21;
     export let height = 29.7;
-    export let orientation = 'landscape'
+    export let orientation = 'landscape';
+    export let bgImage
 
     let newHeight = orientation == 'portrait' ? height : width
     let newWidth = orientation == 'portrait' ? width : height
 </script>
 
 <div class="page {orientation}" style={`max-width: ${newWidth}cm; max-height: ${newHeight}cm`} bind:this={page}>
+    <img src={bgImage} alt="" class="watermark">
     <div class="page-header">
         <h1>Header da página</h1>
     </div>
@@ -21,7 +23,18 @@
 </div>
 
 <style>
+    .watermark {
+        position: absolute;
+        opacity: .2;
+        max-width: 200px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
   	.page {
+        position: relative;
         padding: 1.5cm 1.0cm 1.0cm 1.0cm;
         margin-top: 5%;
         margin-left: auto;
