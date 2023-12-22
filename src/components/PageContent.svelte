@@ -44,8 +44,54 @@
     </p>
 
     <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque ducimus molestias sint, repudiandae non velit doloribus, hic sit similique consequatur voluptatem modi praesentium odio eos assumenda accusamus quam culpa dolor?
+        Vitae facilis voluptates aspernatur veniam dolorum omnis deserunt! Nostrum adipisci, commodi ipsum amet qui, pariatur dolorem quo possimus harum voluptas consequuntur inventore quia. Optio in placeat, sed ut est impedit.
+        Debitis itaque incidunt esse alias nulla accusantium beatae eum quos autem, explicabo et. Nihil quibusdam, assumenda, odit ex esse delectus quia voluptatem, dolorum consequatur facilis expedita tempora repudiandae. Reiciendis, quia!
+        Nulla dolorem amet saepe odit, rerum quaerat cum quod consequatur ullam placeat sed culpa ipsum. Eos illum totam incidunt non est voluptatum minus temporibus quia nisi dolorem in, nemo animi!
+        Amet eligendi repellendus distinctio cumque voluptate fuga numquam voluptatem earum dignissimos debitis harum minima vero animi, iste ipsum quos reiciendis provident suscipit quis rerum. Aspernatur minima officiis et maxime repellat.
+        Dolores hic sunt, reiciendis quisquam minima consequuntur nisi enim, quaerat quae adipisci ducimus architecto error quam magnam iure natus culpa numquam veniam unde mollitia autem ratione nam? Voluptates, optio libero.
+        Nulla ratione beatae laboriosam qui nisi aut pariatur ipsa magni eius maxime necessitatibus veritatis voluptatibus perspiciatis error suscipit molestiae rem molestias porro illum, nostrum earum fuga odit aliquam quo. Dolores?
+        Similique nemo cupiditate perspiciatis temporibus beatae magni id optio nobis, ratione dignissimos, veniam suscipit? Optio necessitatibus nobis, officia blanditiis deleniti autem ut quisquam deserunt dolores id, harum obcaecati consectetur qui?
+        Molestiae earum voluptatem alias aperiam. Maiores, reprehenderit eligendi? Quasi odit nesciunt ipsa, enim possimus, temporibus culpa, voluptatem laboriosam aspernatur hic illo doloribus quod. Inventore culpa voluptatem nam eum porro atque!
+        Ratione corporis repudiandae temporibus aspernatur eos aperiam unde, reiciendis facere expedita recusandae officia itaque voluptas placeat odio illum nihil saepe, a porro suscipit? Qui sunt quam harum, placeat magnam totam!
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam laboriosam magni natus unde earum, in, iste nisi minima ut minus cupiditate et voluptas similique. Similique, vel esse. Nesciunt, assumenda repellat.
     </p>
+
+    <table class="tftable">
+        <caption>Tabela muito legal</caption>
+        <thead>
+            <tr>
+                <th>Sujeito</th>
+                <th>Ação</th>
+                <th>Envolvido</th>
+                <th>Consequência</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Eu</td>
+                <td>Atirar o pau</td>
+                <td>Gato</td>
+                <td>Sobrevivência do gato</td>
+            </tr>
+            <tr>
+                <td>Dona Chica</td>
+                <td>Testemunhar</td>
+                <td>Gato</td>
+                <td>Admiração com o berro</td>
+            </tr>
+            <tr>
+                <td>Gato</td>
+                <td>Berrar</td>
+                <td>Eu e Dona Chica</td>
+                <td>Miar</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+
+        </tfoot>
+    </table>
 
 </div>
 
@@ -55,11 +101,37 @@
         display: none;
     }
 
+    .tftable {
+        font-size:12px;
+        color:#333333;
+        width:100%;
+        border-width: 1px;
+        border-color: #a9a9a9;
+        border-collapse: collapse;
+    }
+    .tftable th {
+        font-size:12px;
+        background-color:#b8b8b8;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9a9a9;
+        text-align:left;
+    }
+    .tftable td {
+        font-size:12px;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9a9a9;
+    }
     @media print {
         .content {
             flow: page-flow;
             -webkit-flow: page-flow;
             display: none;
         }
+
+        
     }
 </style>

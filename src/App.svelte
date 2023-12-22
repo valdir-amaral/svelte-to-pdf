@@ -20,7 +20,7 @@
 	</Paginator>
 	
 	
-	<Page bind:page/>
+	<Page orientation="portrait" bind:page/>
 </div>
 
 <PageContent bind:content />

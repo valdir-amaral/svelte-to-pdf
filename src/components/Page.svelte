@@ -1,10 +1,14 @@
 <script>
 	export let page
-    export let size
-    export let orientation
+    export let width = 21;
+    export let height = 29.7;
+    export let orientation = 'landscape'
+
+    let newHeight = orientation == 'portrait' ? height : width
+    let newWidth = orientation == 'portrait' ? width : height
 </script>
 
-<div class="page" bind:this={page}>
+<div class="page {orientation}" style={`max-width: ${newWidth}cm; max-height: ${newHeight}cm`} bind:this={page}>
     <div class="page-header">
         <h1>Header da página</h1>
     </div>
@@ -18,8 +22,6 @@
 
 <style>
   	.page {
-        width: 21cm;
-        min-height: 29.7cm;
         padding: 1.5cm 1.0cm 1.0cm 1.0cm;
         margin-top: 5%;
         margin-left: auto;
@@ -43,9 +45,15 @@
         padding: 0.2cm;
         border-right: 1px #ccc dotted;
         border-left: 1px #ccc dotted;
-        height: 241.8mm;
+        height: 24.18cm;
         text-align:justify;
         text-justify:inter-word;
+    }
+    .page.portrait .page-body {
+        height: 24.18cm;
+    }
+    .page.landscape .page-body {
+        height: 15.4cm;
     }
     .page-footer {
         bottom: 0;
@@ -58,18 +66,30 @@
     }
     @media print {
         @page {
-            size: A4;
-
+            size: A4 landscape;
         }
         .page {
             margin: 0;
             border: none;
             border-radius: 0;
-            width: 210mm;
-            min-height: 295mm;
+            
             box-shadow: 0;
             background: initial;
             page-break-after: always;
+        }
+        .page.portrait {
+            width: 210mm;
+            height: 295mm;
+        }
+        .page.landscape {
+            height: 210mm;
+            width: 295mm;
+        }
+        .page.portrait .page-body {
+            height: 24.18cm;
+        }
+        .page.landscape .page-body {
+            height: 15.4cm;
         }
         .page-header, .page-footer, .page-body {
             border: none;
