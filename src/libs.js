@@ -103,17 +103,24 @@ export class Paginator {
     paginateTable(table, container) {
       const currentPbody = this.currentPbody || this.getPageBody(this.currentPage);
       const tableContainer = container.cloneNode(false);
-      currentPbody.appendChild(tableContainer);
-  
+      console.log(tableContainer)
+      currentPbody.appendChild(table);
+      console.log(currentPbody);
+      
+      const thead = table.querySelector('thead');
+      const tfoot = table.querySelector('tfoot');
+
+      console.log(thead, tfoot)
       const rows = Array.from(table.querySelectorAll('tbody > tr'));
       rows.forEach(row => {
         const newRow = row.cloneNode(true);
         tableContainer.appendChild(newRow);
   
         if (ElementUtils.hasOverflow(currentPbody)) {
+          console.log('quebrou');
           newRow.remove();
           this.makePage();
-          this.paginateTable(table, container);
+          this.paginateTable(table, currentPbody);
         }
       });
     }

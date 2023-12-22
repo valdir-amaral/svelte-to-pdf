@@ -57,6 +57,24 @@
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam laboriosam magni natus unde earum, in, iste nisi minima ut minus cupiditate et voluptas similique. Similique, vel esse. Nesciunt, assumenda repellat.
     </p>
 
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem hic, nemo optio voluptate, eveniet vero qui officia esse natus perferendis dignissimos magnam porro dolor, illo dolores tenetur at aliquid vel.
+        Repellendus exercitationem dolorem commodi iusto aliquid quas labore sapiente sit! Reprehenderit quod sint perspiciatis, enim minus voluptate corrupti porro, in soluta harum, illo laudantium pariatur nobis quia ad ipsam quis.
+        Officia, sed ipsam corrupti voluptas nam nihil voluptatem et illum in tempore culpa aliquid, sint, necessitatibus nostrum expedita. Repellendus modi aut a voluptatibus laboriosam expedita magni nisi ullam consequatur tempore?
+        Beatae et possimus reiciendis nemo iure quo facere, sed expedita quas quam velit, aperiam doloremque assumenda dolores alias. Minima impedit, rem quam sint culpa voluptatem earum! Ad eligendi tempore magnam!
+        Autem, fugiat ratione reprehenderit repellendus saepe neque debitis necessitatibus maxime? Consectetur pariatur et doloribus ipsum numquam! Dignissimos sed aliquid sunt quod optio fugiat a quaerat minus, dicta doloribus magnam debitis!
+        Sint porro debitis eveniet nemo deserunt fuga quae aliquid, cumque consequuntur sequi quod hic facere commodi, ratione magnam architecto assumenda, quo quas alias expedita. Non libero ipsam accusantium impedit nisi!
+        Ab, corrupti? Animi sed, eum omnis accusantium numquam harum amet maxime voluptatum dolorum neque obcaecati architecto laudantium delectus itaque nihil voluptas aut earum eius. Quo pariatur vero error eos minima!
+        Ut autem error pariatur corporis, tenetur quidem labore laboriosam. Illo voluptatibus, dicta sequi eos at animi optio consequuntur in cumque fuga iusto culpa aspernatur asperiores repellat quae? Laudantium, fugit et.
+        In eligendi illum eos quia sed impedit! Maiores id consectetur numquam architecto alias eaque perspiciatis, quos culpa velit est vero quam magnam, magni ab aut minus debitis ipsa doloribus expedita.
+        Aut consequatur, laboriosam perspiciatis sed inventore atque! Quo repellendus expedita unde! Asperiores voluptates, modi illo repudiandae placeat atque voluptas ipsum beatae sunt labore molestiae, eum sit ullam non odio temporibus!
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente eveniet voluptatum reprehenderit, ullam, exercitationem vitae magni ad blanditiis eum quia nam nostrum ex neque autem dolores aut nisi dignissimos voluptatibus.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, numquam? Accusantium dignissimos debitis minus! Fugit nam distinctio, optio illo minus cupiditate sunt aperiam perspiciatis illum eos! Doloribus eveniet harum nam.
+        Error reprehenderit dolorem nisi fugiat ipsum, minima quisquam provident fugit sunt dignissimos optio consequatur. Dicta excepturi placeat alias. Natus doloremque esse nam aliquid nemo. Aperiam iste odit nisi excepturi vitae.
+    </p>
     <table class="tftable">
         <caption>Tabela muito legal</caption>
         <thead>
@@ -86,10 +104,17 @@
                 <td>Eu e Dona Chica</td>
                 <td>Miar</td>
             </tr>
+        
+        
         </tbody>
 
         <tfoot>
-
+            <tr>
+                <td>Que função um footer teria</td>
+                <td>Nessa tabela?</td>
+                <td>Acho que nenhuma</td>
+                <td>Miau!</td>
+            </tr>
         </tfoot>
     </table>
 
@@ -124,6 +149,10 @@
         padding: 8px;
         border-style: solid;
         border-color: #a9a9a9;
+    }
+    .tftable tfoot {
+        background-color: #6e6e6e;
+        color: white;
     }
     @media print {
         .content {
