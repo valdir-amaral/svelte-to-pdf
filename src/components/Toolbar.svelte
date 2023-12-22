@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-
+    export let inputStatus;
     const dispatch = createEventDispatcher();
 
     let printPage = () => {
@@ -9,6 +9,7 @@
 </script>
 
 <div class="toolbar">
+    <input type="checkbox" bind:checked={inputStatus}>
     <button on:click={printPage} id="print">Print</button>
 </div>
 

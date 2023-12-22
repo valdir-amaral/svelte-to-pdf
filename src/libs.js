@@ -1,5 +1,3 @@
-import { debug } from "svelte/internal";
-
 export class ElementUtils {
     static hasOverflow(element) {
       if (!element) {
@@ -94,9 +92,10 @@ export class Paginator {
         let nodeClone = this.currentPbody.cloneNode(true);
         this.currentPbody.appendChild(element)
 
-        console.log(nodeClone)
+        console.log(this.currentPbody.clientHeight)
+        console.log(this.currentPbody.scrollHeight)
         console.log(ElementUtils.hasOverflow(this.currentPbody))
-        if (ElementUtils.hasOverflow(nodeClone)) {
+        if (ElementUtils.hasOverflow(this.currentPbody)) {
           console.log('estourou!!')
         }
       } else {

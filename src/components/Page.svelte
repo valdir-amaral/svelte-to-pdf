@@ -17,7 +17,7 @@
 	<div class="page-body"></div>
 	<div class="page-footer">
         <footer>
-            &copy; TMX | 2023 
+            &copy; Gatos | {new Date().getFullYear()} 
         </footer>
     </div>
 </div>
@@ -55,6 +55,7 @@
         text-align: center;
     }
     .page-body {
+        overflow: hidden;
         padding: 0.2cm;
         border-right: 1px #ccc dotted;
         border-left: 1px #ccc dotted;
@@ -85,8 +86,7 @@
             margin: 0;
             border: none;
             border-radius: 0;
-            
-            box-shadow: 0;
+            box-shadow: none;
             background: initial;
             page-break-after: always;
         }

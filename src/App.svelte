@@ -4,7 +4,7 @@
 	import Toolbar from "./components/Toolbar.svelte";
 	import PageContent from "./components/PageContent.svelte";
 
-	let page, content;
+	let page, content, showSidebar;
 
 	const printAll = () => {
 		window.print()
@@ -12,8 +12,8 @@
 </script>
 
 <div class="printview">
-	
-	<Toolbar on:print={printAll}/>
+
+	<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
 	
 	<Paginator bind:page={page} bind:content>
 	
