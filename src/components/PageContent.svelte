@@ -118,6 +118,26 @@
         </tfoot>
     </table>
 
+    <h2 class="txt-center">Entenda por que gatos são incríveis</h2>
+    
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium, ratione, commodi consequuntur repellendus aspernatur voluptatem eius recusandae, qui officia laudantium saepe consequatur neque porro earum fugit aliquid architecto tempore laboriosam? Não devemos atirar o pau no gato!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla laboriosam enim eligendi architecto officiis, ducimus tempora porro voluptas doloremque repellendus rem, nisi labore possimus molestiae velit unde consectetur deleniti delectus.
+    Aperiam accusamus nihil, perferendis est necessitatibus illum ratione mollitia nulla odit incidunt eius deleniti numquam asperiores adipisci aspernatur quas nisi, distinctio sapiente excepturi voluptates quis itaque optio eligendi fugiat! Accusantium!
+    Asperiores tempore quo sit omnis, nostrum recusandae dolores eius in nemo assumenda nobis debitis animi dicta accusamus distinctio quasi placeat eos iste voluptatibus inventore nihil sint at quia repellendus! Quam.
+    Quod, laboriosam accusamus quisquam reiciendis magnam nam nisi sequi, enim distinctio alias doloribus animi id sapiente vero? Culpa debitis possimus aliquid quam non dolor consequuntur rerum nemo repellat! Eos, aliquam.
+    Nostrum minus quibusdam vel, facere aliquam ullam laudantium repellat aspernatur voluptates accusamus quaerat, necessitatibus, perspiciatis earum itaque? Officiis, esse. Qui debitis ad perspiciatis ducimus, suscipit numquam asperiores. Voluptas, quae illum!
+    Delectus quia optio nihil expedita laboriosam nesciunt eos at placeat ea ducimus fuga, laudantium voluptate explicabo quasi aut dolores libero aliquid? Odio expedita quia voluptate porro corrupti, exercitationem dolorem quasi!
+    Quaerat quo odio esse quia doloremque. Dolorem eligendi veniam aliquam sequi reprehenderit doloribus fugiat beatae. Fuga odio, dignissimos, labore debitis natus veniam ut iusto, vero optio repudiandae magni vel dolorum.
+    Aut earum beatae voluptates sunt! Ducimus quos deserunt doloremque sit illo iste, fuga dolores impedit quae tempora, ab doloribus incidunt quas labore sed aperiam odio quaerat in dolorum accusamus dolorem.
+    Voluptate, porro. Ipsa facere saepe voluptas quam quasi quas obcaecati quae natus earum. Maxime, quo. Harum itaque a vero animi sed quaerat voluptates magni unde. Voluptatem ex voluptatibus fugit quae!
+    Veritatis doloribus rerum dolorem iste consequuntur debitis blanditiis magni sint iusto, deleniti impedit ipsa nam eos id laboriosam sequi earum ullam? Iusto hic quisquam consequuntur laborum in. Temporibus, vero rem.
+    Eaque velit nisi repudiandae doloremque harum quae nostrum quod odio odit excepturi tempore rem expedita sint est qui perferendis rerum, magnam nobis perspiciatis. Quibusdam eius corporis possimus dignissimos nostrum harum.
+    Itaque quas ad soluta. Repellat fugit, itaque ab blanditiis non exercitationem labore. Beatae quos quo perferendis, porro, tenetur itaque minus architecto dolorum mollitia ab consequuntur, modi earum recusandae soluta commodi?
+    Officia nulla esse molestias tempore laudantium nesciunt repellendus! Nobis molestiae sequi ipsum deserunt molestias! In quos voluptates hic sed tempore, consectetur dolor quaerat, non esse animi eligendi delectus molestias eaque.
+    Suscipit dolore itaque cumque quas eligendi est ipsum natus asperiores ad aliquam sit iusto error laboriosam, vero quam placeat voluptatibus culpa iste harum, atque, libero alias consequatur. Alias, vel in.
+    Iusto recusandae delectus veritatis non voluptates unde explicabo, ex qui eligendi repellendus maiores, cupiditate quo? Eum sit repellendus, saepe necessitatibus quaerat quod asperiores, error voluptatum quasi ex, quia illum dolor.</p>
+    <img src="/img/gato.jpeg" alt="">
+    
 </div>
 
 <style>
@@ -126,34 +146,7 @@
         display: none;
     }
 
-    .tftable {
-        font-size:12px;
-        color:#333333;
-        width:100%;
-        border-width: 1px;
-        border-color: #a9a9a9;
-        border-collapse: collapse;
-    }
-    .tftable th {
-        font-size:12px;
-        background-color:#b8b8b8;
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #a9a9a9;
-        text-align:left;
-    }
-    .tftable td {
-        font-size:12px;
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #a9a9a9;
-    }
-    .tftable tfoot {
-        background-color: #6e6e6e;
-        color: white;
-    }
+    
     @media print {
         .content {
             flow: page-flow;

@@ -14,7 +14,14 @@ export class ElementUtils {
       }
       return element.nodeType === 1 && element.tagName.toUpperCase() === 'TABLE';
     }
-  
+    
+    static isImage(element) {
+      if (!element) {
+        throw new Error('Element is not defined in isImage check');
+      }
+      return element.nodeType === 1 && element.tagName.toUpperCase() === 'IMG';
+    }
+
     static withColumns(element) {
       if (!element) {
         throw new Error('Element is not defined in withColumns check');
@@ -83,6 +90,15 @@ export class Paginator {
         Array.from(element.children).forEach(child => {
           this.paginateElement(child, container);
         });
+      } else if (ElementUtils.isImage(element)) {
+        let nodeClone = this.currentPbody.cloneNode(true);
+        this.currentPbody.appendChild(element)
+
+        console.log(nodeClone)
+        console.log(ElementUtils.hasOverflow(this.currentPbody))
+        if (ElementUtils.hasOverflow(nodeClone)) {
+          console.log('estourou!!')
+        }
       } else {
         let newNode = element.cloneNode();
         newNode.textContent = '';
@@ -103,21 +119,17 @@ export class Paginator {
     paginateTable(table, container) {
       const currentPbody = this.currentPbody || this.getPageBody(this.currentPage);
       const tableContainer = container.cloneNode(false);
-      console.log(tableContainer)
       currentPbody.appendChild(table);
-      console.log(currentPbody);
       
       const thead = table.querySelector('thead');
       const tfoot = table.querySelector('tfoot');
 
-      console.log(thead, tfoot)
       const rows = Array.from(table.querySelectorAll('tbody > tr'));
       rows.forEach(row => {
         const newRow = row.cloneNode(true);
         tableContainer.appendChild(newRow);
   
         if (ElementUtils.hasOverflow(currentPbody)) {
-          console.log('quebrou');
           newRow.remove();
           this.makePage();
           this.paginateTable(table, currentPbody);
