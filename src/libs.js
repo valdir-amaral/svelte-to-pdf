@@ -5,7 +5,34 @@ export class ElementUtils {
       }
       return element.scrollHeight > element.clientHeight;
     }
+
+    static willImgOverflow(container, element){
+      if (!container) {
+        throw new Error('Container is not defined in willImgOverflow check');
+      }
+      if (!element) {
+        throw new Error('Element is not defined in willImgOverflow check');
+      }
+      return container.scrollHeight < element.naturalHeight + container.clientHeight;
+    }
   
+    static willOverflow(paginator, element){
+      if (!paginator) {
+        throw new Error('Pontainer is not defined in willOverflow check');
+      }
+      if (!element) {
+        throw new Error('Element is not defined in willOverflow check');
+      }
+
+      let footer = paginator.currentPfoot.getBoundingClientRect(),
+          bodyLastChild = paginator.currentPbody.lastChild?.getBoundingClientRect();
+
+      if (!bodyLastChild) return false;
+
+      return Math.ceil(bodyLastChild.bottom) + Math.ceil(element.clientHeight) + 20 > Math.ceil(footer.top);
+
+    }
+
     static isTable(element) {
       if (!element) {
         throw new Error('Element is not defined in isTable check');
@@ -17,7 +44,7 @@ export class ElementUtils {
       if (!element) {
         throw new Error('Element is not defined in isImage check');
       }
-      return element.nodeType === 1 && element.tagName.toUpperCase() === 'IMG';
+      return element.nodeType === 1 && ['IMG', 'SVG', 'CANVAS'].includes(element.tagName.toUpperCase());
     }
 
     static withColumns(element) {
@@ -32,6 +59,7 @@ export class Paginator {
     constructor() {
       this.currentPage = null;
       this.currentPbody = null;
+      this.mode = '';
     }
   
     makePage() {
@@ -45,16 +73,18 @@ export class Paginator {
       document.querySelector('.printview').appendChild(clone);
   
       this.currentPage = clone;
-      this.currentPbody = this.getPageBody(clone);
-  
+      this.currentPhead = this.getPageElement('header');
+      this.currentPbody = this.getPageElement('body');
+      this.currentPfoot = this.getPageElement('footer');
+
       return ElementUtils.hasOverflow(clone) ? undefined : clone;
     }
   
-    getPageBody(page) {
-      if (!page) {
-        throw new Error('Page is not defined in getPageBody');
+    getPageElement(type) {
+      if (!type) {
+        throw new Error('Type is not defined in getPageElement');
       }
-      return page.querySelector('.page-body');
+      return this.currentPage.querySelector(`.page-${type}`);
     }
   
     paginateText(wordArray, node) {
@@ -82,22 +112,37 @@ export class Paginator {
     }
   
     paginateElement(element, container) {
+
       if (ElementUtils.isTable(element)) {
         this.paginateTable(element, container);
       } else if (element.children.length > 0) {
-        Array.from(element.children).forEach(child => {
-          this.paginateElement(child, container);
-        });
+        this.paginatable = [
+          ...Array.from(element.children).map(child => [child, container]),
+          ...this.paginatable
+        ];
       } else if (ElementUtils.isImage(element)) {
-        let nodeClone = this.currentPbody.cloneNode(true);
-        this.currentPbody.appendChild(element)
+        this.mode = 'pause';
+        let self = this;
+        let img = new Image();
+        
+        // As imagens são carregadas de maneira assincrona, e nós precisamos 
+        // do tamanho da imagem para calcular se a pagina irá quebrar ou não
+        // por isso pausamos a renderização até que a imagem seja carregada
+        // e então continuamos com a paginação, isso também garante que a imagem
+        // será incluida no layout no momento certo. Neste caso, sacrificamos
+        // performance em favor de qualidade.
 
-        console.log(this.currentPbody.clientHeight)
-        console.log(this.currentPbody.scrollHeight)
-        console.log(ElementUtils.hasOverflow(this.currentPbody))
-        if (ElementUtils.hasOverflow(this.currentPbody)) {
-          console.log('estourou!!')
+        img.onload = function() {
+          if (ElementUtils.willImgOverflow(self.currentPbody, img)){
+            self.makePage();
+          }
+          self.currentPbody.appendChild(element);
+          if (self.paginatable.length) {
+            self.mode = 'paging';
+            self.doPagination();
+          }
         }
+        img.src = element.src;
       } else {
         let newNode = element.cloneNode();
         newNode.textContent = '';
@@ -109,30 +154,58 @@ export class Paginator {
       if (!this.currentPage) {
         this.currentPage = this.makePage();
       }
+
+      let container = content.cloneNode(true);
+      container.innerHTML = '';
       
-      const container = ElementUtils.withColumns(content) ? content.cloneNode(true) : this.currentPbody;
-  
-      this.paginateElement(content, container);
+      this.paginatable = [[content, container]];
+
+      if (this.mode === '') {
+        this.mode = 'paging';
+        this.doPagination();
+      }
+
+    }
+
+    doPagination(){
+      while (this.paginatable.length && this.mode == 'paging'){
+        this.paginateElement(...this.paginatable.shift());
+      }
     }
   
     paginateTable(table, container) {
-      const currentPbody = this.currentPbody || this.getPageBody(this.currentPage);
-      const tableContainer = container.cloneNode(false);
-      currentPbody.appendChild(table);
-      
-      const thead = table.querySelector('thead');
-      const tfoot = table.querySelector('tfoot');
+      let tableContainer, thead, tbody, row, self = this;
+
+      const tfoot = table.querySelector('tfoot')?.cloneNode(true);
 
       const rows = Array.from(table.querySelectorAll('tbody > tr'));
-      rows.forEach(row => {
-        const newRow = row.cloneNode(true);
-        tableContainer.appendChild(newRow);
-  
-        if (ElementUtils.hasOverflow(currentPbody)) {
-          newRow.remove();
+
+      function cloneTable(){
+        tableContainer = table.cloneNode(true);
+        tableContainer.style.maxWidth = `${self.currentPbody.getBoundingClientRect().width - 50}px`;
+        thead = table.querySelector('thead')?.cloneNode(true);
+        tbody = table.querySelector('tbody').cloneNode(true);
+
+        tableContainer.innerHTML = '';
+        tbody.innerHTML = '';
+        thead && tableContainer.appendChild(thead);
+        tableContainer.appendChild(tbody);
+        self.currentPbody.appendChild(tableContainer);
+      }
+
+      while (rows.length){
+        row = rows.shift();
+
+        if (typeof tableContainer === 'undefined') cloneTable();
+
+        if (ElementUtils.willOverflow(this, row)) {
           this.makePage();
-          this.paginateTable(table, currentPbody);
+          cloneTable();
         }
-      });
+
+        tbody.appendChild(row);
+      }
+
+      tfoot && table.appendChild(tfoot);
     }
 }

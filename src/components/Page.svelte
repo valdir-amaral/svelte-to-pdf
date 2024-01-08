@@ -47,7 +47,7 @@
         margin-bottom: 5%;
     }
     .page-header {
-        padding: 0.2cm;
+        /* padding: 0.2cm; */
         border-top: 1px #ccc dotted;
         border-right: 1px #ccc dotted;
         border-left: 1px #ccc dotted;
@@ -56,7 +56,7 @@
     }
     .page-body {
         overflow: hidden;
-        padding: 0.2cm;
+        /*padding: 0.2cm;*/
         border-right: 1px #ccc dotted;
         border-left: 1px #ccc dotted;
         height: 24.18cm;
@@ -71,7 +71,7 @@
     }
     .page-footer {
         bottom: 0;
-        padding: 0.2cm;
+        /*padding: 0.2cm;*/
         border-right: 1px #ccc dotted;
         border-bottom: 1px #ccc dotted;
         border-left: 1px #ccc dotted;

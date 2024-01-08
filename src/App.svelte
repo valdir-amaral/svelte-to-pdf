@@ -15,11 +15,8 @@
 
 	<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
 	
-	<Paginator bind:page={page} bind:content>
-	
-	</Paginator>
-	
-	
+	<Paginator bind:page={page} bind:content />
+
 	<Page bgImage="/img/logo.jpg" orientation="portrait" bind:page/>
 </div>
 
