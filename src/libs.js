@@ -73,7 +73,8 @@ export class Paginator {
         throw new Error('Template page not found');
       }
       const clone = templatePage.cloneNode(true);
-      clone.id = document.querySelectorAll('.page').length
+      clone.id = document.querySelectorAll('.page').length;
+      clone.style.display = 'block';
       clone.querySelector('.page-body').innerHTML = '';
       document.querySelector('.printview').appendChild(clone);
   
@@ -81,7 +82,7 @@ export class Paginator {
       this.currentPhead = this.getPageElement('header');
       this.currentPbody = this.getPageElement('body');
       this.currentPfoot = this.getPageElement('footer');
-      
+
       return ElementUtils.hasOverflow(clone) ? undefined : clone;
     }
   
