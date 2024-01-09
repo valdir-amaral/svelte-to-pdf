@@ -5,8 +5,10 @@ body {
     background-color: rgb(64, 64, 64);
     font: 10pt"Arial";
     color: #444;
+    scroll-behavior: smooth;
 }
 * {
+    scroll-behavior: smooth;
     -webkit-box-sizing: border-box;
     -khtml-box-sizing: border-box;
     -moz-box-sizing: border-box;

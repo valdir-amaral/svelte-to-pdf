@@ -23,7 +23,7 @@
 	<Page bgImage="/img/logo.jpg" orientation={localStorage.orientation ? localStorage.orientation : $configs.orientation} bind:page/>
 
 	
-
+	
 </div>
 
 <PageContent bind:content />

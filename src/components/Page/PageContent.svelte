@@ -67,6 +67,7 @@
       verecundius,
       illi fortasse constantius. </p>
 
+    <h3>Subtítulo menor</h3>
     <p>An est aliquid, quod te sua sponte delectet? Unum nescio, quo modo possit, si luxuriosus sit, finitas cupiditates
       habere. Aut unde est hoc contritum vetustate proverbium: quicum in tenebris? Confecta res esset. Varietates
       autem

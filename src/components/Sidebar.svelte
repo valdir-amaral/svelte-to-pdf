@@ -1,7 +1,8 @@
 <script>
     import { configs } from "../store";
+    import SummaryMenu from "./Summary/SummaryMenu.svelte";
 
-    export let show = true;
+    export let show = false;
     let orientations = [
         {value: 'portrait', label: 'Retrato'},
         {value: 'landscape', label: 'Paisagem'}
@@ -14,31 +15,29 @@
 </script>
 
 <aside class:show={show}>
-    <h2>Configurações</h2>
+    <h2>Sumário</h2>
     <div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <span>Layout</span>
             <select name="" id="" on:change={changeOrientation}>
                 {#each orientations as or}
                 <option selected={localStorage.orientation == or.value} value={or.value}>{or.label}</option>
                 {/each}
             </select>
-        </div>
+        </div>-->
 
-        <div class="form-group">
-            
-        </div>
+        <SummaryMenu />
     </div>
 </aside>
 
 <style>
 aside {
-    width: 400px;
+    width: 300px;
     height: 100%;
     position: fixed;
     top: 50px;
     z-index: 1000;
-    padding: 20px 60px;
+    padding: 20px 30px;
     transition: transform .8s cubic-bezier(0, 1.78, 0.95, 1);
     transform: translateX(-400px);
     background-color: rgb(71, 71, 71);

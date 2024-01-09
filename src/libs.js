@@ -1,4 +1,4 @@
-import { totalPages } from "./store";
+import { totalPages, summary } from "./store";
 import { get } from "svelte/store";
 
 export class ElementUtils {
@@ -66,7 +66,6 @@ export class Paginator {
     }
   
     makePage() {
-      console.log('Making a new page');
       totalPages.set(get(totalPages) + 1)
       const templatePage = document.querySelector('.page');
       if (!templatePage) {
@@ -118,7 +117,7 @@ export class Paginator {
     }
   
     paginateElement(element, container) {
-
+      Summary.separateElement(element);
       if (ElementUtils.isTable(element)) {
         this.paginateTable(element, container);
       } else if (element.children.length > 0) {
@@ -201,17 +200,37 @@ export class Paginator {
 
       while (rows.length){
         row = rows.shift();
-
         if (typeof tableContainer === 'undefined') cloneTable();
-
         if (ElementUtils.willOverflow(this, row)) {
           this.makePage();
           cloneTable();
         }
-
         tbody.appendChild(row);
       }
-
       tfoot && table.appendChild(tfoot);
     }
+}
+
+export class Summary {
+  static separateElement(element) {
+    let summaryArr = get(summary);
+    let number = +element.tagName.replace('H', '');
+    switch (number) {
+      case 1:
+        summaryArr.push({el: element, label: element.innerText, children: []})
+        break;
+      case 2:
+        summaryArr[summaryArr.length - 1].children.push({el: element, label: element.innerText, children: []})
+        break;
+      case 3: 
+        let h2Arr = summaryArr[summaryArr.length - 1].children
+        h2Arr[h2Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
+        break;
+      case 4: 
+        let h3Arr = summary[summaryArr.length-1].children[summaryArr.length-1].children;
+        h3Arr[h3Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
+    }
+
+    element.id = `${element.tagName.toLowerCase()}-${element.innerText.replaceAll(' ', '-')}`
+  }
 }

@@ -33,6 +33,7 @@
         padding: 8px 12px;
         border-radius: 6px;
         max-width: fit-content;
+        position: relative;
     }
     .actual-page-input:focus {
         outline: none;
@@ -48,4 +49,5 @@
     input[type=number]::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
+    
 </style>
