@@ -1,16 +1,24 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import PageCount from "./PageCount.svelte";
     export let inputStatus;
     const dispatch = createEventDispatcher();
 
     let printPage = () => {
         dispatch('print');
     }
+
+    const search = ev => {
+        
+    }
 </script>
 
 <div class="toolbar">
-    <input type="checkbox" bind:checked={inputStatus}>
-    <button on:click={printPage} id="print">Print</button>
+    <div>
+        <input type="checkbox" bind:checked={inputStatus}>
+        <button on:click={printPage} id="print">Imprimir</button>
+    </div>
+    <PageCount on:countupdate={search} actualPage=1 totalPages=7 />
 </div>
 
 <style>
@@ -33,14 +41,18 @@
         transform: translateY(-3px);
     }
     .toolbar {
+        color: white;
+        display: flex;
+        align-items: center;
         background: none repeat scroll 0% 0% rgba(0, 0, 255, 0.3);
         background-color: rgb(71, 71, 71);
         min-height: 32px;
         width: 100%;
         box-shadow: 1px 0px 0px rgba(255, 255, 255, 0.08) inset, 0px 1px 1px rgba(0, 0, 0, 0.15) inset, 0px -1px 0px rgba(255, 255, 255, 0.05) inset, 0px 1px 0px rgba(0, 0, 0, 0.15), 0px 1px 1px rgba(0, 0, 0, 0.1);
         padding: 0;
-        position: absolute;
+        position: fixed;
         left: 0px;
+        z-index: 1000;
         top: 0px;
     }
 

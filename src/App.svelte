@@ -3,6 +3,7 @@
 	import Page from "./components/Page.svelte";
 	import Toolbar from "./components/Toolbar.svelte";
 	import PageContent from "./components/PageContent.svelte";
+  import Sidebar from "./components/Sidebar.svelte";
 
 	let page, content, showSidebar;
 
@@ -10,6 +11,8 @@
 		window.print()
 	}
 </script>
+
+<Sidebar show={showSidebar} />
 
 <div class="printview">
 
