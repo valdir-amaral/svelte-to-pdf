@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    import PageCount from "./PageCount.svelte";
+    import PageCount from "./Page/PageCount.svelte";
     import { totalPages } from "../store";
 	import { get } from "svelte/store";
 
@@ -21,14 +21,44 @@
 </script>
 
 <div class="toolbar">
-    <div>
-        <input type="checkbox" bind:checked={inputStatus}>
-        <button on:click={printPage} id="print">Imprimir</button>
+    <div class="container">
+        <div>
+            <button class="side-toggle" on:click={() => inputStatus = !inputStatus}>
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </div>
+        <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
+        <div>
+            <button on:click={printPage} id="print">Imprimir</button>
+        </div>
     </div>
-    <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
 </div>
 
 <style>
+    .side-toggle {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 15px;
+    }
+    .side-toggle i {
+        color: white;
+        font-size: 22px;
+        transition: all 1s;
+    }
+    .side-toggle:hover i {
+        transform: rotate(360deg);
+    }
+    .toolbar .container {
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        align-items: center;
+    }
     #print {
         background-color: #216778;
         border: none;

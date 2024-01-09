@@ -9,6 +9,8 @@
     $: {
         if (actualPage > totalPages) {
             actualPage = totalPages;
+        } else if (actualPage == null || actualPage == 0) {
+            actualPage = 1;
         }
         dispatch('countupdate', {
             actualPage,
@@ -19,7 +21,7 @@
 
 <div class="page-count">
     <input placeholder="1" min="1" max={totalPages} class="actual-page-input" type="number" name="" id="" bind:value={actualPage}> 
-    / {totalPages}
+    / &nbsp; {totalPages}
 </div>
 
 
@@ -31,6 +33,11 @@
         padding: 8px 12px;
         border-radius: 6px;
         max-width: fit-content;
+    }
+    .actual-page-input:focus {
+        outline: none;
+        font-weight: bold;
+        border: 1px solid rgb(95, 95, 95);
     }
     .page-count {
         margin: auto;

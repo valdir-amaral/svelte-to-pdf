@@ -1,8 +1,8 @@
 <script>
-	import Paginator from "./components/Paginator.svelte";
-	import Page from "./components/Page.svelte";
+	import Paginator from "./components/Page/Paginator.svelte";
+	import Page from "./components/Page/Page.svelte";
 	import Toolbar from "./components/Toolbar.svelte";
-	import PageContent from "./components/PageContent.svelte";
+	import PageContent from "./components/Page/PageContent.svelte";
   import Sidebar from "./components/Sidebar.svelte";
 
 	let page, content, showSidebar;

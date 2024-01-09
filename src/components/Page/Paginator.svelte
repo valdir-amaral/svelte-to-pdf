@@ -1,5 +1,5 @@
 <script>
-    import { Paginator } from '../libs';
+    import { Paginator } from '../../libs';
 
     export let content, page;
 
