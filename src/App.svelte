@@ -10,6 +10,7 @@
 	const printAll = () => {
 		window.print()
 	}
+
 </script>
 
 <Sidebar show={showSidebar} />
@@ -26,7 +27,6 @@
 <PageContent bind:content />
 
 <style>
-
 	.row {
 		display: flex;
 		gap: 15px;

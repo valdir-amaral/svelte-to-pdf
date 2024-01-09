@@ -7,6 +7,8 @@
 
     let newHeight = orientation == 'portrait' ? height : width
     let newWidth = orientation == 'portrait' ? width : height
+
+
 </script>
 
 <div class="page {orientation}" style={`max-width: ${newWidth}cm; max-height: ${newHeight}cm`} bind:this={page}>

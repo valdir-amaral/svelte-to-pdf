@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
 
-    export let actualPage = 0;
+    export let actualPage = 1;
     export let totalPages = 4;
 
     const dispatch = createEventDispatcher();
@@ -18,7 +18,7 @@
 </script>   
 
 <div class="page-count">
-    <input placeholder="0" min="0" max={totalPages} class="actual-page-input" type="number" name="" id="" bind:value={actualPage}> 
+    <input placeholder="1" min="1" max={totalPages} class="actual-page-input" type="number" name="" id="" bind:value={actualPage}> 
     / {totalPages}
 </div>
 

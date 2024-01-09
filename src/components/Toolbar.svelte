@@ -1,15 +1,22 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-  import PageCount from "./PageCount.svelte";
+    import { createEventDispatcher } from "svelte";
+    import PageCount from "./PageCount.svelte";
+    import { totalPages } from "../store";
+	import { get } from "svelte/store";
+
     export let inputStatus;
+
+    let end = '...'
     const dispatch = createEventDispatcher();
+
+	setTimeout(() => end = get(totalPages), 1500)
 
     let printPage = () => {
         dispatch('print');
     }
 
     const search = ev => {
-        
+        location.hash = ev.detail.actualPage
     }
 </script>
 
@@ -18,7 +25,7 @@
         <input type="checkbox" bind:checked={inputStatus}>
         <button on:click={printPage} id="print">Imprimir</button>
     </div>
-    <PageCount on:countupdate={search} actualPage=1 totalPages=7 />
+    <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
 </div>
 
 <style>

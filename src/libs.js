@@ -1,3 +1,6 @@
+import { totalPages } from "./store";
+import { get } from "svelte/store";
+
 export class ElementUtils {
     static hasOverflow(element) {
       if (!element) {
@@ -64,11 +67,13 @@ export class Paginator {
   
     makePage() {
       console.log('Making a new page');
+      totalPages.set(get(totalPages) + 1)
       const templatePage = document.querySelector('.page');
       if (!templatePage) {
         throw new Error('Template page not found');
       }
       const clone = templatePage.cloneNode(true);
+      clone.id = document.querySelectorAll('.page').length
       clone.querySelector('.page-body').innerHTML = '';
       document.querySelector('.printview').appendChild(clone);
   
@@ -76,7 +81,7 @@ export class Paginator {
       this.currentPhead = this.getPageElement('header');
       this.currentPbody = this.getPageElement('body');
       this.currentPfoot = this.getPageElement('footer');
-
+      
       return ElementUtils.hasOverflow(clone) ? undefined : clone;
     }
   

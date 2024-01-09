@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from 'svelte';
     import { Paginator } from '../libs';
 
     export let content, page;
