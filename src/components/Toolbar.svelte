@@ -11,7 +11,6 @@
 
 	setTimeout(() =>{
         end = get(totalPages)
-        console.log($summary)
     }, 1500)
 
     let printPage = () => {
@@ -40,7 +39,7 @@
     <div class="container">
         <div>
             <button class="side-toggle" on:click={() => inputStatus = !inputStatus}>
-                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-book"></i>
             </button>
         </div>
         <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
@@ -64,10 +63,10 @@
     .side-toggle i {
         color: white;
         font-size: 22px;
-        transition: all 1s;
+        transition: all .2s;
     }
     .side-toggle:hover i {
-        transform: rotate(360deg);
+        transform: scale(1.2);
     }
     .toolbar .container {
         display: flex;
@@ -94,7 +93,7 @@
     #print:hover {
         background-color: #1d5361;
         color: #b8b8b8;
-        transform: translateY(-3px);
+        transform: scale(1.1);
     }
     .toolbar {
         color: white;

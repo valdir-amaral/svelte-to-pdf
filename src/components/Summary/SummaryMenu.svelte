@@ -4,13 +4,11 @@ import { summary } from "../../store";
 
 let infoVisibility = {}
 function showTab(chapter) {
-    if (infoVisibility[chapter.label.replaceAll(' ', '_')] == undefined) {
-        infoVisibility[chapter.label.replaceAll(' ', '_')] = true
-    } else {
-        infoVisibility[chapter.label.replaceAll(' ', '_')] = !infoVisibility[chapter.label.replaceAll(' ', '_')]
-    }
-
-    console.log(infoVisibility)
+  if (infoVisibility[chapter.label.replaceAll(' ', '_')] == undefined) {
+      infoVisibility[chapter.label.replaceAll(' ', '_')] = true
+  } else {
+      infoVisibility[chapter.label.replaceAll(' ', '_')] = !infoVisibility[chapter.label.replaceAll(' ', '_')]
+  }
 }
 
   let items = [];
@@ -37,7 +35,7 @@ function showTab(chapter) {
         {#if h2.children.length}
           <button style="margin-right: -16px;" class:active={infoVisibility[h2.label.replaceAll(' ', '_')]} on:click={() => showTab(h2)}>➤</button>
         {/if}
-        <a style="text-indent: 5px;" href={`#${h2.el.tagName.toLowerCase()}-${h2.el.innerText.replaceAll(' ', '-')}`}>&nbsp;&nbsp; {h2.label}</a>
+        <a style="font-size: 14px; text-indent: 5px;" href={`#${h2.el.tagName.toLowerCase()}-${h2.el.innerText.replaceAll(' ', '-')}`}>&nbsp;&nbsp; {h2.label}</a>
       </div>
       {#if h2.children.length && infoVisibility[h2.label.replaceAll(' ', '_')]}
         {#each h2.children as h3}
@@ -45,7 +43,7 @@ function showTab(chapter) {
             {#if h3.children.length}
               <button on:click={() => showTab(h3)}>➤</button>
             {/if}
-            <a href={`#${h3.el.tagName.toLowerCase()}-${h3.el.innerText.replaceAll(' ', '-')}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {h3.label}</a>
+            <a style="font-size: 12px;" href={`#${h3.el.tagName.toLowerCase()}-${h3.el.innerText.replaceAll(' ', '-')}`}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {h3.label}</a>
           </div>
         {/each}
       {/if}

@@ -5,15 +5,15 @@
 	import PageContent from "./components/Page/PageContent.svelte";
   	import Sidebar from "./components/Sidebar.svelte";
 	import { configs } from "./store";
+  import Loading from "./components/Loading.svelte";
 	let page, content, showSidebar;
 
 	const printAll = () => {
 		window.print()
 	}
 
-	$: console.log($configs)
 </script>
-
+<Loading />
 <Sidebar show={showSidebar} />
 
 <div class="printview">
