@@ -3,14 +3,15 @@
 	import Page from "./components/Page/Page.svelte";
 	import Toolbar from "./components/Toolbar.svelte";
 	import PageContent from "./components/Page/PageContent.svelte";
-  import Sidebar from "./components/Sidebar.svelte";
-
+  	import Sidebar from "./components/Sidebar.svelte";
+	import { configs } from "./store";
 	let page, content, showSidebar;
 
 	const printAll = () => {
 		window.print()
 	}
 
+	$: console.log($configs)
 </script>
 
 <Sidebar show={showSidebar} />
@@ -18,10 +19,11 @@
 <div class="printview">
 
 	<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
-	
 	<Paginator bind:page={page} bind:content />
+	<Page bgImage="/img/logo.jpg" orientation={localStorage.orientation ? localStorage.orientation : $configs.orientation} bind:page/>
 
-	<Page bgImage="/img/logo.jpg" orientation="portrait" bind:page/>
+	
+
 </div>
 
 <PageContent bind:content />

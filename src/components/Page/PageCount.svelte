@@ -45,4 +45,7 @@
         gap: 8px;
         align-items: center;
     }
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
 </style>

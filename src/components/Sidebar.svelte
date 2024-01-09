@@ -1,5 +1,16 @@
 <script>
-    export let show = false;
+    import { configs } from "../store";
+
+    export let show = true;
+    let orientations = [
+        {value: 'portrait', label: 'Retrato'},
+        {value: 'landscape', label: 'Paisagem'}
+    ]
+    const changeOrientation = ev => {
+        configs.set({orientation: ev.target.value})
+        localStorage.orientation = ev.target.value; 
+        location.reload()
+    }
 </script>
 
 <aside class:show={show}>
@@ -7,7 +18,15 @@
     <div>
         <div class="form-group">
             <span>Layout</span>
-            <p>Paisagem</p>
+            <select name="" id="" on:change={changeOrientation}>
+                {#each orientations as or}
+                <option selected={localStorage.orientation == or.value} value={or.value}>{or.label}</option>
+                {/each}
+            </select>
+        </div>
+
+        <div class="form-group">
+            
         </div>
     </div>
 </aside>
@@ -34,6 +53,13 @@ p {
 .form-group {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
     justify-content: space-between;
+}
+
+@media print {
+    aside {
+        display: none;
+    }
 }
 </style>
