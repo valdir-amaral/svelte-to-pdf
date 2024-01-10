@@ -19,6 +19,7 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
+    "jspdf": "^2.5.1",
     "sirv-cli": "^2.0.0"
   }
 }
