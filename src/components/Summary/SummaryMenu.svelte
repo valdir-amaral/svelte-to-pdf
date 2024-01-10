@@ -14,11 +14,10 @@ function showTab(chapter) {
   
   setTimeout(() => {
     items = $summary;
-
+    console.log(items)
   }, 1500)
 
   const handleClick = (el) => {
-    console.log(el.el.getBoundingClientRect())
     window.scrollTo(0, el.el.offsetTop)
   }
  
@@ -29,7 +28,7 @@ function showTab(chapter) {
     {#if h1.children.length}
       <button class:active={infoVisibility[h1.label.replaceAll(' ', '_')]} on:click={() =>showTab(h1)}>➤</button>
     {/if}
-    <a style="text-indent: 20px;" on:click={() => handleClick(h1)}>{h1.label}</a>
+    <a style="text-indent: 20px;" href={'#'+h1.el.id}>{h1.label}</a>
   </div>
   
   {#if h1.children.length && infoVisibility[h1.label.replaceAll(' ', '_')]}
@@ -38,7 +37,7 @@ function showTab(chapter) {
         {#if h2.children.length}
           <button style="margin-right: -16px;" class:active={infoVisibility[h2.label.replaceAll(' ', '_')]} on:click={() => showTab(h2)}>➤</button>
         {/if}
-        <a style="font-size: 14px; text-indent: 5px;" on:click={() => handleClick(h2)}>&nbsp;&nbsp; {h2.label}</a>
+        <a style="font-size: 14px; text-indent: 5px;" href={'#'+h2.el.id}>&nbsp;&nbsp; {h2.label}</a>
       </div>
       {#if h2.children.length && infoVisibility[h2.label.replaceAll(' ', '_')]}
         {#each h2.children as h3}
@@ -46,7 +45,7 @@ function showTab(chapter) {
             {#if h3.children.length}
               <button on:click={() => showTab(h3)}>➤</button>
             {/if}
-            <a style="font-size: 12px;" on:click={() => handleClick(h3)}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {h3.label}</a>
+            <a style="font-size: 12px;" href={'#'+h3.el.id}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {h3.label}</a>
           </div>
         {/each}
       {/if}

@@ -183,7 +183,6 @@ export class Paginator {
 
     doPagination(){
       while (this.paginatable.length && this.mode == 'paging'){
-        console.log(this.paginatable)
         this.paginateElement(...this.paginatable.shift());
       }
     }
@@ -242,8 +241,7 @@ export class Summary {
         h3Arr[h3Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
     }
     if (!isNaN(number)) {
-      element.setAttribute('name', `#${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`)
-      element.id = `#${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`
+      element.id = `${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`
     }
   }
 }

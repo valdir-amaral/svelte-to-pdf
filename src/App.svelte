@@ -2,26 +2,38 @@
 	import Paginator from "./components/Page/Paginator.svelte";
 	import Page from "./components/Page/Page.svelte";
 	import Toolbar from "./components/Toolbar.svelte";
-	import PageContent from "./components/Page/PageContent.svelte";
-  	import Sidebar from "./components/Sidebar.svelte";
+	import jsPDF from 'jspdf';
+	import Sidebar from "./components/Sidebar.svelte";
 	import { configs } from "./store";
   import Loading from "./components/Loading.svelte";
 	export let selector = '#main-content';
 
 	let page, content = document.querySelector(selector), showSidebar;
 
-
 	console.log(document.querySelector('#main-content'))
 	const printAll = () => {
-		window.print()
+		window.print();
+
+		/* Script pra salvar o PDF.
+		let htmlContent = document.querySelector('.printview').innerHTML
+		let pdf = new jsPDF();
+		pdf.html(htmlContent, {
+			callback: function (pdf) {
+				pdf.save('meu-arquivo-pdf.pdf');
+			},
+			x: 10,
+			y: 10,
+		});
+		*/
 	}
 
 </script>
 <Loading />
 <Sidebar show={showSidebar} />
 
+<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
+
 <div class="printview">
-	<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
 	<Paginator {content} bind:page={page} />
 	<Page bgImage="/img/logo.jpg" orientation={localStorage.orientation ? localStorage.orientation : $configs.orientation} bind:page/>
 </div>

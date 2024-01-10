@@ -10,7 +10,6 @@
         display: none;
     }
 
-    
     @media print {
         .content {
             flow: page-flow;
