@@ -1,11 +1,21 @@
 <script>
     import { createEventDispatcher } from "svelte";
     import PageCount from "./Page/PageCount.svelte";
-    import { summary, totalPages } from "../store";
+    import { summary, totalPages, configs } from "../store";
 	import { get } from "svelte/store";
 
     export let inputStatus;
-
+/*
+    let orientations = [
+        {value: 'portrait', label: 'Retrato'},
+        {value: 'landscape', label: 'Paisagem'}
+    ]
+    const changeOrientation = ev => {
+        configs.set({orientation: ev.target.value})
+        localStorage.orientation = ev.target.value; 
+        location.reload()
+    }
+    */
     let end = '...'
     const dispatch = createEventDispatcher();
 
@@ -44,6 +54,16 @@
             </button>
         </div>
         <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
+
+        <!--<div class="form-group">
+            <span>Layout</span>
+            <select name="" id="" on:change={changeOrientation}>
+                {#each orientations as or}
+                <option selected={localStorage.orientation == or.value} value={or.value}>{or.label}</option>
+                {/each}
+            </select>
+        </div>-->
+
         <div>
             <button on:click={printPage} id="print">Imprimir</button>
         </div>

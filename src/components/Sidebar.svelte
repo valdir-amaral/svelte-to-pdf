@@ -1,30 +1,14 @@
 <script>
-    import { configs } from "../store";
     import SummaryMenu from "./Summary/SummaryMenu.svelte";
 
     export let show = false;
-    let orientations = [
-        {value: 'portrait', label: 'Retrato'},
-        {value: 'landscape', label: 'Paisagem'}
-    ]
-    const changeOrientation = ev => {
-        configs.set({orientation: ev.target.value})
-        localStorage.orientation = ev.target.value; 
-        location.reload()
-    }
+
 </script>
 
 <aside class:show={show}>
     <h2>Sumário</h2>
     <div>
-        <!--<div class="form-group">
-            <span>Layout</span>
-            <select name="" id="" on:change={changeOrientation}>
-                {#each orientations as or}
-                <option selected={localStorage.orientation == or.value} value={or.value}>{or.label}</option>
-                {/each}
-            </select>
-        </div>-->
+        
 
         <SummaryMenu />
     </div>
