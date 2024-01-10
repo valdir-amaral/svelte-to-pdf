@@ -67,13 +67,3 @@ table tfoot {
     background-color: #6e6e6e;
     color: white;
 }
-
-.txt-start {
-    text-align: start;
-}
-.txt-center {
-    text-align: center;
-}
-.txt-end {
-    text-align: end;
-}

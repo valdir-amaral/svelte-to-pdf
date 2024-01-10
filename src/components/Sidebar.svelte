@@ -1,15 +1,12 @@
 <script>
     import SummaryMenu from "./Summary/SummaryMenu.svelte";
-
+    
     export let show = false;
-
 </script>
 
 <aside class:show={show}>
     <h2>Sumário</h2>
     <div>
-        
-
         <SummaryMenu />
     </div>
 </aside>

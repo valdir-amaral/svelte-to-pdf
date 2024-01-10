@@ -117,6 +117,12 @@ export class Paginator {
     }
   
     paginateElement(element, container) {
+      if (element.classList.contains('blank-page')) {
+        this.makePage();
+        if (!element.nextElementSibling.classList.contains('blank-page') ) {
+          this.makePage();
+        }
+      }
       Summary.separateElement(element);
       if (ElementUtils.isTable(element)) {
         this.paginateTable(element, container);
@@ -148,6 +154,9 @@ export class Paginator {
           }
         }
         img.src = element.src;
+      } else if (element.classList.contains('page-break')) {
+        this.makePage()
+
       } else {
         let newNode = element.cloneNode();
         newNode.textContent = '';
@@ -174,6 +183,7 @@ export class Paginator {
 
     doPagination(){
       while (this.paginatable.length && this.mode == 'paging'){
+        console.log(this.paginatable)
         this.paginateElement(...this.paginatable.shift());
       }
     }
@@ -213,6 +223,7 @@ export class Paginator {
 
 export class Summary {
   static separateElement(element) {
+    console.log(element.getBoundingClientRect())
     let summaryArr = get(summary);
     let number = +element.tagName.replace('H', '');
     switch (number) {
@@ -231,8 +242,8 @@ export class Summary {
         h3Arr[h3Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
     }
     if (!isNaN(number)) {
-      element.id = `${element.tagName.toLowerCase()}-${element.innerText.replaceAll(' ', '-')}`
-
+      element.setAttribute('name', `#${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`)
+      element.id = `#${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`
     }
   }
 }

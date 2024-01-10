@@ -6,12 +6,12 @@
   	import Sidebar from "./components/Sidebar.svelte";
 	import { configs } from "./store";
   import Loading from "./components/Loading.svelte";
-	let page, content, showSidebar;
+	export let selector = '#main-content';
 
-	/*export let selector = '#main-content';
+	let page, content = document.querySelector(selector), showSidebar;
 
-	content = document.querySelector(selector);
- */
+
+	console.log(document.querySelector('#main-content'))
 	const printAll = () => {
 		window.print()
 	}
@@ -22,11 +22,10 @@
 
 <div class="printview">
 	<Toolbar bind:inputStatus={showSidebar} on:print={printAll}/>
-	<Paginator bind:page={page} {content} />
+	<Paginator {content} bind:page={page} />
 	<Page bgImage="/img/logo.jpg" orientation={localStorage.orientation ? localStorage.orientation : $configs.orientation} bind:page/>
 </div>
 
-<PageContent bind:content />
 
 
 <style>
