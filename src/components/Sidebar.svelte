@@ -38,7 +38,7 @@ aside {
     top: 50px;
     z-index: 1000;
     padding: 20px 30px;
-    transition: transform .8s cubic-bezier(0, 1.78, 0.95, 1);
+    transition: transform .4s ease-in-out;
     transform: translateX(-400px);
     background-color: rgb(71, 71, 71);
     color: #f1f1f1;

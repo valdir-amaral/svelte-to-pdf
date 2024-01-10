@@ -23,15 +23,16 @@
 
     let active = true
     let timer
-    window.onscroll = () => {
+    /*window.onscroll = () => {
         active = false
         if (timer) {
             clearTimeout(timer);
         }
         timer = setTimeout(() => {
             active = true
-        }, 1500)
+        }, 1000)
     }
+    */
 </script>
 
 

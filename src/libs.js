@@ -187,7 +187,7 @@ export class Paginator {
 
       function cloneTable(){
         tableContainer = table.cloneNode(true);
-        tableContainer.style.maxWidth = `${self.currentPbody.getBoundingClientRect().width - 50}px`;
+        tableContainer.style.maxWidth = `${self.currentPbody.getBoundingClientRect().width}px`;
         thead = table.querySelector('thead')?.cloneNode(true);
         tbody = table.querySelector('tbody').cloneNode(true);
 
@@ -230,7 +230,9 @@ export class Summary {
         let h3Arr = summary[summaryArr.length-1].children[summaryArr.length-1].children;
         h3Arr[h3Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
     }
+    if (!isNaN(number)) {
+      element.id = `${element.tagName.toLowerCase()}-${element.innerText.replaceAll(' ', '-')}`
 
-    element.id = `${element.tagName.toLowerCase()}-${element.innerText.replaceAll(' ', '-')}`
+    }
   }
 }
