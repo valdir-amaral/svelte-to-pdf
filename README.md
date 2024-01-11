@@ -1,107 +1,79 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# Manual de utilização - Ferramenta HTML para PDF
 
 ---
 
-# svelte app
+## Sobre o projeto
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+HTML para PDF é uma ferramenta que pagina automaticamente o conteúdo nela inserido (tabelas, imagens e entre outros elementos) e transforma em um PDF dinâmico.
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+## Comece agora
+
+Para iniciar, crie um documento HTML básico na raiz do projeto e importe dentro da tag ```<head>``` os arquivos CSS e JavaScript pré-compilados, para a aplicação já rodar perfeita!
+
+<img src="/doc/doc-1.png"/>
+
+
+## Inserindo elementos fixos
+
+Para utilizar header e footer, basta criar uma tag no body com a classe "page", indicando que é um modelo de página que irá se repetir pra todas as outras.
+
+<img src="/doc/doc-2.png" />
+
+```O id 0 deve ser aplicado para que o elemento suma. Não queremos que a página modelo seja impressa junto, não é?```
+
+Você ainda pode colocar a marca d'água da sua empresa no fundo de um jeito bem simples. basta incorporar uma imagem normalmente no HTML utilizando a classe "watermark"
+
+```
+<img src="/caminho/para/imagem.jpg" class="watermark" />
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+## Adicionando conteúdo
 
+O conteúdo para a exibição das páginas é inserido dentro da div com id "main-content", que faz a mágica acontecer. Utilize imagens, tabelas e outros elementos HTML!
 
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
+```
+<div id="main-content" style="display: none">
+  <h1>Meu título adorável!</h1>
+</div>
 ```
 
-...then start [Rollup](https://rollupjs.org):
+<img src="/doc/doc-3.png" />
 
-```bash
-npm run dev
+## Sumário
+
+O sumário é um sistema de navegação que permite encontrar capítulos já separados automaticamente. Funciona pela hierarquia dos seus títulos (h1,h2,h3,h4). Após criado, seu elemento é identificado pelo sumário como
+
+```
+(elemento)-(conteúdo)
 ```
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Ou seja: ```<h2>Meu subtitulo adoravel</h2>``` se converte a ```<h2 id="h2-meu-subtitulo-adoravel">Meu subtitulo adoravel</h2>```
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+Da mesma forma como isso é feito automaticamente, você pode ao criar o HTML referenciar os seus elementos com links internos navegáveis.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+Você pode ver a hierarquia pronta apertando no ícone do canto superior esquerdo:
 
-## Building and running in production mode
+<img src="/doc/doc-4.png" />
 
-To create an optimised version of the app:
+Clicando no texto você é redirecionado para o elemento e na seta os filhos são mostrados (subtítulos h2 dentro de h1 e por aí vai)
 
-```bash
-npm run build
-```
+## Elementos pré-definidos
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Quebra de página ➡️ ```<div class="page-break"></div>``` <br>
+Essa tag irá ignorar se o conteúdo pode continuar e uma nova página será criada.
 
+Página em branco ➡️ ```<div class="blank-page"></div>``` <br>
+Uma página sem conteúdo algum, a não ser seu footer, header e marca d'água, será criada. 
 
-## Single-page app mode
+## Tags de estilo
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+Se por acaso você não gostar muito de CSS para estilizar coisas simples dos seus elementos, você pode usar algumas tags obsoletas como o <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/center" target="_blank">center</a>, por exemplo, ou usar atributos, como o <a href="https://www.w3resource.com/html/attributes/html-align-attribute.php">align="center"</a>.
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+## Impressão
 
-```js
-"start": "sirv public --single"
-```
+Depois de montado o seu PDF, você pode apertar no botão IMPRIMIR, no canto superior direito, para realizar a impressão do seu documento e/ou salvá-lo como PDF em um arquivo.
 
-## Using TypeScript
+<img src="/doc/doc-5.png" /> 
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+E pronto! Deixe sua criatividade fluir criando o seu próprio estilo - é só importar normalmente no index.html.
