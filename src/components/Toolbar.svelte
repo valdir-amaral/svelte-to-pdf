@@ -50,7 +50,7 @@
     <div class="container">
         <div>
             <button class="side-toggle" on:click={() => inputStatus = !inputStatus}>
-                <i class="fa-solid fa-book"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" width="20" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>
             </button>
         </div>
         <PageCount on:countupdate={search} actualPage=1 totalPages={end} />
@@ -81,12 +81,11 @@
         cursor: pointer;
         padding: 15px;
     }
-    .side-toggle i {
-        color: white;
-        font-size: 22px;
+    .side-toggle svg {
+        fill: white;
         transition: all .2s;
     }
-    .side-toggle:hover i {
+    .side-toggle:hover svg {
         transform: scale(1.2);
     }
     .toolbar .container {
