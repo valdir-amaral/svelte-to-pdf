@@ -111,11 +111,8 @@ table tfoot {
     text-align:justify;
     text-justify:inter-word;
 }
-.page.portrait .page-body {
+.page .page-body {
     height: 24.18cm;
-}
-.page.landscape .page-body {
-    height: 15.4cm;
 }
 .page-footer {
     bottom: 0;
@@ -128,7 +125,7 @@ table tfoot {
 }
 @media print {
     @page {
-        size: A4 landscape;
+        size: A4 portrait;
     }
     .page {
         margin: 0;
@@ -138,19 +135,12 @@ table tfoot {
         background: initial;
         page-break-after: always;
     }
-    .page.portrait {
+    .page {
         width: 210mm;
         height: 295mm;
     }
-    .page.landscape {
-        height: 210mm;
-        width: 295mm;
-    }
-    .page.portrait .page-body {
+    .page .page-body {
         height: 24.18cm;
-    }
-    .page.landscape .page-body {
-        height: 15.4cm;
     }
     .page-header, .page-footer, .page-body {
         border: none;
