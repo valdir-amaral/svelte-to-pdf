@@ -21,12 +21,12 @@ Para incorporar cabeçalho (header) e rodapé (footer), simplesmente crie uma ta
 
 ![Exemplo de Elementos Fixos](/doc/doc-2.png)
 
-```Atribua o ID 0 para ocultar o elemento. Desejamos evitar a impressão da página modelo, certo?```
-
-Se deseja adicionar facilmente a marca d'água da sua empresa, basta incorporar uma imagem no HTML usando a classe "watermark".
+Se deseja adicionar facilmente a marca d'água da sua empresa, basta incorporar uma div com uma imagem no HTML usando o id "watermark".
 
 ```html
-<img src="/caminho/para/imagem.jpg" class="watermark" />
+<div id="watermark">
+  <img src="/caminho/para/imagem.jpg" />
+</div>
 ```
 
 ## Incorporando Conteúdo
@@ -34,7 +34,7 @@ Se deseja adicionar facilmente a marca d'água da sua empresa, basta incorporar 
 O conteúdo destinado à exibição das páginas é inserido na div com o ID "main-content", a qual desencadeia as operações mágicas. Sinta-se à vontade para utilizar imagens, tabelas e outros elementos HTML!
 
 ```html
-<div id="main-content" style="display: none">
+<div id="main-content">
   <h1>Meu título adorável!</h1>
   <!-- Adicione aqui o restante do seu conteúdo -->
 </div>
@@ -44,13 +44,7 @@ O conteúdo destinado à exibição das páginas é inserido na div com o ID "ma
 
 ## Sumário Automático
 
-O sumário é um sistema de navegação que facilita a localização de capítulos, organizando-os automaticamente com base na hierarquia dos títulos (h1, h2, h3, h4). Após a criação, cada elemento é identificado no sumário da seguinte forma:
-
-```
-(elemento)-(conteúdo)
-```
-
-Por exemplo: `<h2>Meu subtitulo adorável</h2>` se converte em `<h2 id="h2-meu-subtitulo-adoravel">Meu subtitulo adorável</h2>`.
+O sumário é um sistema de navegação que facilita a localização de capítulos, organizando-os automaticamente com base na hierarquia dos títulos (h1, h2, h3, h4). Após a criação, cada elemento é identificado no sumário com um id aleatório:
 
 Assim como isso é feito automaticamente, você também pode criar links internos navegáveis ao referenciar seus elementos no HTML. A hierarquia pode ser visualizada ao clicar no ícone no canto superior esquerdo:
 
