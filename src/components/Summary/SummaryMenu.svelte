@@ -7,11 +7,14 @@
   export let indent = 0;
 
 let infoVisibility = {}
+
+
 function showTab(chapter) {
-  if (infoVisibility[chapter.label.replaceAll(' ', '_')] == undefined) {
-      infoVisibility[chapter.label.replaceAll(' ', '_')] = true
+  console.log(chapter)
+  if (infoVisibility[chapter] == undefined) {
+      infoVisibility[chapter] = true
   } else {
-      infoVisibility[chapter.label.replaceAll(' ', '_')] = !infoVisibility[chapter.label.replaceAll(' ', '_')]
+      infoVisibility[chapter] = !infoVisibility[chapter]
   }
 }
  
@@ -27,14 +30,15 @@ const handleClick = (elementSelector) => {
  
 </script>
 
-{#if children.length}
-  <button class:active={infoVisibility[label]} on:click={() =>showTab(level)}>➤</button>
-{/if}
-<a style="text-indent: 20px;" href="#" on:click|preventDefault={handleClick(target)}>{label}</a>
 
 {#if children.length}
+  <button class={'_'+level} class:active={infoVisibility[target]} on:click={() =>showTab(target)}>➤</button>
+{/if}
+<a style={`text-indent: ${indent*20}px;`} href="#" on:click|preventDefault={handleClick(target)}>{label}</a>
+
+{#if children.length && infoVisibility[target]}
   {#each children as child}
-    <svelte:self {...child} indent = {indent + 1} />
+      <svelte:self {...child} indent = {indent + 1} />
   {/each}
 {/if}
 
@@ -62,7 +66,7 @@ const handleClick = (elementSelector) => {
     color: white !important;
     align-items: center;
   }
-  .menu-opt button {
+  button {
     position: absolute;
     z-index: 1000;
     color: white;
@@ -73,7 +77,13 @@ const handleClick = (elementSelector) => {
     border: none;
     outline: none;
   }
-  .menu-opt button.active {
+  button.active {
     transform: rotate(90deg);
+  }
+  button._1 {
+    transform: translateX(-20px);
+  }
+  button._1.active {
+    transform: translateX(-20px) rotate(90deg);
   }
 </style>
