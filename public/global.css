@@ -80,6 +80,8 @@ table tfoot {
     margin: auto;
 }
   .page {
+    max-width: 21cm;
+    max-height: 29.7cm;
     position: relative;
     padding: 1.5cm 1.0cm 1.0cm 1.0cm;
     margin-top: 5%;

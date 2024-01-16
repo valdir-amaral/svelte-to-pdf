@@ -15,11 +15,14 @@ function showTab(chapter) {
   }
 }
  
-const handleClick = (element) => {
-  debugger;
+const handleClick = (elementSelector) => {
+  let element = document.querySelector(`[data-summary-id="${elementSelector}"]`);
   //document.querySelector('.printview').scrollTo(0, element.offsetTop)
   //element.focus();
-  element.scrollIntoView(true);
+  element.scrollIntoView({
+    "behavior": "smooth",
+    "block": "center"
+  });
 }
  
 </script>
@@ -27,7 +30,7 @@ const handleClick = (element) => {
 {#if children.length}
   <button class:active={infoVisibility[label]} on:click={() =>showTab(level)}>➤</button>
 {/if}
-<a style="text-indent: 20px;" target="#" on:click|preventDefault={handleClick(el)}>{label}</a>
+<a style="text-indent: 20px;" href="#" on:click|preventDefault={handleClick(target)}>{label}</a>
 
 {#if children.length}
   {#each children as child}

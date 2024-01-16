@@ -93,7 +93,7 @@ export class Paginator {
       }
 
       if (this.pageFooter) {
-        header = this.pageFooter.innerHTML;
+        footer = this.pageFooter.innerHTML;
       }
 
       let template = `
@@ -104,7 +104,7 @@ export class Paginator {
           </div>
         <div class="page-body"></div>
         <div class="page-footer">
-              ${footer};
+              ${footer}
           </div>
       </div>`,
       fragment = document.createRange().createContextualFragment(template);

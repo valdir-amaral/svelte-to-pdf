@@ -28,7 +28,7 @@
     }
 
     const search = ev => {
-        location.hash = ev.detail.actualPage
+        location.hash = `page_${ev.detail.actualPage}`
     }
 
     let active = true
