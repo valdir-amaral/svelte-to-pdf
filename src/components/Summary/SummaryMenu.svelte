@@ -1,5 +1,10 @@
 <script>
-import { summary } from "../../store";
+  export let level;
+  export let el;
+  export let label;
+  export let children = [];
+  export let target;
+  export let indent = 0;
 
 let infoVisibility = {}
 function showTab(chapter) {
@@ -9,50 +14,26 @@ function showTab(chapter) {
       infoVisibility[chapter.label.replaceAll(' ', '_')] = !infoVisibility[chapter.label.replaceAll(' ', '_')]
   }
 }
-
-  let items = [];
-  
-  setTimeout(() => {
-    items = $summary;
-    console.log(items)
-  }, 1500)
-
-  const handleClick = (el) => {
-    window.scrollTo(0, el.el.offsetTop)
-  }
+ 
+const handleClick = (element) => {
+  debugger;
+  //document.querySelector('.printview').scrollTo(0, element.offsetTop)
+  //element.focus();
+  element.scrollIntoView(true);
+}
  
 </script>
 
-{#each items as h1} 
-  <div class="menu-opt">
-    {#if h1.children.length}
-      <button class:active={infoVisibility[h1.label.replaceAll(' ', '_')]} on:click={() =>showTab(h1)}>➤</button>
-    {/if}
-    <a style="text-indent: 20px;" href={'#'+h1.el.id}>{h1.label}</a>
-  </div>
-  
-  {#if h1.children.length && infoVisibility[h1.label.replaceAll(' ', '_')]}
-    {#each h1.children as h2}
-      <div class="menu-opt">
-        {#if h2.children.length}
-          <button style="margin-right: -16px;" class:active={infoVisibility[h2.label.replaceAll(' ', '_')]} on:click={() => showTab(h2)}>➤</button>
-        {/if}
-        <a style="font-size: 14px; text-indent: 5px;" href={'#'+h2.el.id}>&nbsp;&nbsp; {h2.label}</a>
-      </div>
-      {#if h2.children.length && infoVisibility[h2.label.replaceAll(' ', '_')]}
-        {#each h2.children as h3}
-          <div class="menu-opt">
-            {#if h3.children.length}
-              <button on:click={() => showTab(h3)}>➤</button>
-            {/if}
-            <a style="font-size: 12px;" href={'#'+h3.el.id}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {h3.label}</a>
-          </div>
-        {/each}
-      {/if}
-    {/each}
-  {/if}
+{#if children.length}
+  <button class:active={infoVisibility[label]} on:click={() =>showTab(level)}>➤</button>
+{/if}
+<a style="text-indent: 20px;" target="#" on:click|preventDefault={handleClick(el)}>{label}</a>
 
-{/each}
+{#if children.length}
+  {#each children as child}
+    <svelte:self {...child} indent = {indent + 1} />
+  {/each}
+{/if}
 
 <style>
   a {

@@ -50,6 +50,13 @@ export class ElementUtils {
       return element.nodeType === 1 && ['IMG', 'SVG', 'CANVAS'].includes(element.tagName.toUpperCase());
     }
 
+    static isSummarizable(element){
+      if (!element){
+        throw new Error('Element is not defined in isSummarizable check')
+      }
+      return element.nodeType === 1 && element.tagName.toUpperCase().match(/H[1-6]/gi);
+    }
+
     static withColumns(element) {
       if (!element) {
         throw new Error('Element is not defined in withColumns check');
@@ -59,30 +66,72 @@ export class ElementUtils {
 };
 
 export class Paginator {
-    constructor() {
+    constructor(parent, header, footer, watermark) {
+      this.parent = parent;
       this.currentPage = null;
       this.currentPbody = null;
       this.mode = '';
+      this.pageHeader = header;
+      this.pageFooter = footer;
+      this.watermark = watermark;
+      this.summary = [];
+      this.summaryLastNode = null;
     }
   
+    getPageFragment(){
+
+      let watermark = '', header = '', footer = '', pageId;
+
+      pageId = `page_${this.parent.querySelectorAll(".page").length + 1}`;
+
+      if (this.watermark) {
+        watermark =  `<img src="${watermark}" alt="" class="watermark" />`;
+      }
+
+      if (this.pageHeader) {
+        header = this.pageHeader.innerHTML;
+      }
+
+      if (this.pageFooter) {
+        header = this.pageFooter.innerHTML;
+      }
+
+      let template = `
+      <div id="${pageId}" class="page {orientation}">
+          ${watermark}
+          <div class="page-header">
+              ${header}
+          </div>
+        <div class="page-body"></div>
+        <div class="page-footer">
+              ${footer};
+          </div>
+      </div>`,
+      fragment = document.createRange().createContextualFragment(template);
+      return [pageId, fragment];
+    }
+
     makePage() {
       totalPages.set(get(totalPages) + 1)
-      const templatePage = document.querySelector('.page');
+      const [pageId, pageFragment] = this.getPageFragment();
+      
+      this.parent.appendChild(pageFragment);
+      let templatePage = this.parent.querySelector(`#${pageId}`);
+
       if (!templatePage) {
         throw new Error('Template page not found');
       }
-      const clone = templatePage.cloneNode(true);
-      clone.id = document.querySelectorAll('.page').length;
-      clone.style.display = 'block';
-      clone.querySelector('.page-body').innerHTML = '';
-      document.querySelector('.printview').appendChild(clone);
+      
+      templatePage.style.display = 'block';
+      templatePage.querySelector('.page-body').innerHTML = '';
+      //templatePage.querySelector('.printview').appendChild(clone);
   
-      this.currentPage = clone;
+      this.currentPage = templatePage;
       this.currentPhead = this.getPageElement('header');
       this.currentPbody = this.getPageElement('body');
       this.currentPfoot = this.getPageElement('footer');
 
-      return ElementUtils.hasOverflow(clone) ? undefined : clone;
+      return ElementUtils.hasOverflow(templatePage) ? undefined : templatePage;
     }
   
     getPageElement(type) {
@@ -90,6 +139,58 @@ export class Paginator {
         throw new Error('Type is not defined in getPageElement');
       }
       return this.currentPage.querySelector(`.page-${type}`);
+    }
+
+    getSummaryElement(element){
+      if (!element) {
+        throw new Error('Element is not define din getSummaryElement');
+      }
+      
+      let tag = element.tagName.toLowerCase(),
+          target = '_' + Math.random().toString(36).substr(2, 9),
+          curLevel = + tag.charAt(1);
+
+      element.dataset.summaryId = target;
+
+      if (tag !== 'H1' && this.summary.length && this.summaryLastNode.level == curLevel - 1) {
+        this.summaryLastNode.children.push({
+          level: curLevel,
+          el: element,
+          label: element.innerText,
+          children: [],
+          target: target,
+          parent: this.summaryLastNode
+        });
+        this.summaryLastNode = this.summaryLastNode.children[this.summaryLastNode.children.length - 1];
+      } else if (tag !== 'H1' && this.summary.length && this.summaryLastNode.level >= curLevel) {
+        // curLevel = h3
+        // lastNodeLevel = h6
+        // we need to move back to h2, to add h3 as childre
+        while (this.summaryLastNode.level >= curLevel) {
+          this.summaryLastNode = this.summaryLastNode.parent;
+        }
+
+        this.summaryLastNode.children.push({
+          level: curLevel,
+          el: element,
+          label: element.innerText,
+          children: [],
+          target: target,
+          parent: this.summaryLastNode
+        })
+        this.summaryLastNode = this.summaryLastNode.children[this.summaryLastNode.children.length - 1];
+
+      } else {
+        this.summary.push({
+          level: curLevel,
+          el: element, 
+          label: element.innerText, 
+          children: [],
+          target: target,
+          parent: null
+        });
+        this.summaryLastNode = this.summary[this.summary.length - 1];
+      }
     }
   
     paginateText(wordArray, node) {
@@ -123,7 +224,11 @@ export class Paginator {
           this.makePage();
         }
       }
-      Summary.separateElement(element);
+
+      if (ElementUtils.isSummarizable(element)) {
+        this.getSummaryElement(element)
+      }
+
       if (ElementUtils.isTable(element)) {
         this.paginateTable(element, container);
       } else if (element.children.length > 0) {
@@ -220,28 +325,3 @@ export class Paginator {
     }
 }
 
-export class Summary {
-  static separateElement(element) {
-    console.log(element.getBoundingClientRect())
-    let summaryArr = get(summary);
-    let number = +element.tagName.replace('H', '');
-    switch (number) {
-      case 1:
-        summaryArr.push({el: element, label: element.innerText, children: []})
-        break;
-      case 2:
-        summaryArr[summaryArr.length - 1].children.push({el: element, label: element.innerText, children: []})
-        break;
-      case 3: 
-        let h2Arr = summaryArr[summaryArr.length - 1].children
-        h2Arr[h2Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
-        break;
-      case 4: 
-        let h3Arr = summary[summaryArr.length-1].children[summaryArr.length-1].children;
-        h3Arr[h3Arr.length - 1].children.push({el: element, label: element.innerText, children: []})
-    }
-    if (!isNaN(number)) {
-      element.id = `${element.tagName.toLowerCase()}-${element.innerText.toLowerCase().replaceAll(' ', '-')}`
-    }
-  }
-}

@@ -11,18 +11,7 @@
 
 </script>
 
-<div id="0" class="page {orientation}" style={`max-width: ${newWidth}cm; max-height: ${newHeight}cm; display: none;`} bind:this={page}>
-    <img src={bgImage} alt="" class="watermark">
-    <div class="page-header">
-        <h1>Header da página</h1>
-    </div>
-	<div class="page-body"></div>
-	<div class="page-footer">
-        <footer>
-            &copy; Gatos | {new Date().getFullYear()} 
-        </footer>
-    </div>
-</div>
+{@html page }}
 
 <style>
     

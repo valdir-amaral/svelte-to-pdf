@@ -1,13 +1,23 @@
 <script>
     import SummaryMenu from "./Summary/SummaryMenu.svelte";
+    import { summary } from "../store";
     
+    let menu = [];
+
+    $: {
+        menu = $summary;
+        console.log(['summary', menu]);
+    }
+
     export let show = false;
 </script>
 
 <aside class:show={show}>
     <h2>Sumário</h2>
     <div>
-        <SummaryMenu />
+        {#each menu as item}
+        <SummaryMenu {...item} />
+        {/each}
     </div>
 </aside>
 

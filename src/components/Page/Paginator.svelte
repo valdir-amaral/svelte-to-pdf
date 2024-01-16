@@ -1,14 +1,22 @@
 <script>
     import { Paginator } from '../../libs';
+    import { summary } from '../../store';
 
-    export let content, page;
+    export let content, header, footer, watermark;
 
-    let paginator;
+    let paginator, preview;
+
+    preview = document.createElement('div');
+    preview.classList.add('printview');
+
+    document.body.appendChild(preview);
+
 
     $: {
-        if (page && content) {
-            paginator = new Paginator(page);
+        if (content) {
+            paginator = new Paginator(preview, header, footer, watermark);
             paginator.paginate(content);
+            $summary = paginator.summary;
         }
     }
    
