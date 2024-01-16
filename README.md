@@ -26,7 +26,7 @@ Para incorporar cabeçalho (header) e rodapé (footer), simplesmente crie uma ta
 Se deseja adicionar facilmente a marca d'água da sua empresa, basta incorporar uma imagem no HTML usando a classe "watermark".
 
 ```html
-<img src="/caminho/para/imagem.jpg" class="watermark" /
+<img src="/caminho/para/imagem.jpg" class="watermark" />
 ```
 
 ## Incorporando Conteúdo
@@ -70,7 +70,7 @@ Esta tag cria uma página vazia, preservando apenas o cabeçalho, rodapé e marc
 
 ## Tags de Estilo
 
-Caso você prefira evitar o uso de CSS para estilizar elementos simples, é possível recorrer a tags obsoletas, como o <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/center" target="_blank">center</a>. Outra opção é utilizar atributos, como o <a href="https://www.w3resource.com/html/attributes/html-align-attribute.php">align="center"</a>.
+Caso você prefira evitar o uso de CSS para estilizar elementos simples, é possível recorrer a tags obsoletas, como o <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/center" target="_blank">center</a>. Outra opção é utilizar atributos, como o <a target="_blank" href="https://www.w3resource.com/html/attributes/html-align-attribute.php">align="center"</a>.
 
 ## Impressão
 
